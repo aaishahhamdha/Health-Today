@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Feather } from "@expo/vector-icons";
 import Nutrition from "../../components/nutrition";
 import News from "../../components/news";
+import Exercise from "../../components/excercise";
 import { UserContext } from "../../context/userContext";
 import { useRouter } from "expo-router";
 import {
@@ -16,7 +17,7 @@ import { signOut } from "firebase/auth";
 import { FIREBASE_AUTH } from "../../FirebaseConfig";
 
 const Dashboard = () => {
-  const [selectedPage, setSelectedPage] = useState("nutrition");
+  const [selectedPage, setSelectedPage] = useState("excercise");
   const { username } = useContext(UserContext);
   const router = useRouter();
 
@@ -54,6 +55,27 @@ const Dashboard = () => {
       </View>
 
       <View style={styles.navigationBarOnAll}>
+      <TouchableOpacity
+          style={[
+            styles.navButtonOnAll,
+            selectedPage === "exercise" && styles.navButtonActiveOnAll,
+          ]}
+          onPress={() => setSelectedPage("exercise")}
+        >
+          <Feather
+            name="activity"
+            size={24}
+            color={selectedPage === "exercise" ? "#1E98AE" : "#666"}
+          />
+          <Text
+            style={[
+              styles.navButtonTextOnAll,
+              selectedPage === "exercise" && styles.navButtonActiveOnAll,
+            ]}
+          >
+            Exercise
+          </Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={[
             styles.navButtonOnAll,
@@ -97,10 +119,13 @@ const Dashboard = () => {
             News
           </Text>
         </TouchableOpacity>
+
+      
       </View>
 
       {selectedPage === "nutrition" && <Nutrition />}
       {selectedPage === "news" && <News />}
+      {selectedPage === "exercise" && <Exercise />}
     </View>
   );
 };
@@ -161,11 +186,6 @@ const styles = StyleSheet.create({
   },
   headerContentOnAll: {
     flex: 1,
-  },
-  headerTitleSectionOnAll: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
   },
   headerTitleOnAll: {
     fontSize: 28,
