@@ -17,7 +17,7 @@ import { signOut } from "firebase/auth";
 import { FIREBASE_AUTH } from "../../FirebaseConfig";
 
 const Dashboard = () => {
-  const [selectedPage, setSelectedPage] = useState("excercise");
+  const [selectedPage, setSelectedPage] = useState("exercise");
   const { username } = useContext(UserContext);
   const router = useRouter();
 

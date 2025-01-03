@@ -41,7 +41,7 @@ const Register = () => {
         { text: "OK", onPress: () => router.push("/Dashboard") },
       ]);
     } catch (error) {
-      if (error.message=="auth/email-already-in-use"){
+      if (error.code=="auth/email-already-in-use"){
         Alert.alert("An account with this email already exists"); 
       }
       else
